@@ -1,6 +1,7 @@
 import os
 
 def loadfile(name):
+    count = 0
     file = open(name, "r")
     f = file.readlines()
     mapKey = {}
@@ -9,11 +10,12 @@ def loadfile(name):
     for row in range(len(f)):
         for col in range(len(f[row])):
             if f[row][col] not in mapKey:
-                mapKey[f[row][col]]=str((row,col))
+                mapKey[f[row][col]]=str(count)
             else:
-                mapKey[f[row][col]]+=", " + str((row, col))
-    save_path = '/Users/zzw_e/Desktop/Research/Recommender game/game-level-recommender-system/examples/output-indexes'
-    output_name = os.path.join(save_path, "Index_"+name)
+                mapKey[f[row][col]]+=", " + str(count)
+            count +=1
+    save_path = '/Users/zzw_e/Desktop/Research/Recommender game/game-level-recommender-system/examples/label'
+    output_name = os.path.join(save_path, "label_"+name)
     output = open(output_name, "w")
     output.write("object : Index\n\n")
     for i in mapKey:
@@ -41,3 +43,4 @@ def main():
 
 
 main()
+loadfile("aliens_lvl0.txt")
